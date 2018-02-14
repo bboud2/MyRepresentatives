@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <ul>
+          <p>
+            <%= member.first_name + member.last_name %><br>
+            <a href=<%= member.url %>> <%= member.url %> </a><br>
+            current party: <%= member.current_party %><br>
+            positions held: <br>
+            <% for(var i = 0; i < member.roles.length; i++){ %>
+              congress: <%= member.roles[i].congress + " " + member.roles[i].title %><br>
+            <% } %>
+          </p>
+        </div>
+    </ul>
+  </body>
+</html>

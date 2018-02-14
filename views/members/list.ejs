@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <ul>
+      <% for(var i = 0; i < members.length; i++){ %>
+        <div class="hovermember">
+          <li><span><%= members[i].first_name + " " + members[i].last_name + ": " + members[i].state  %></span></li>
+          <p>
+            <%= members[i].title + ": " + members[i].first_name + " " + members[i].last_name %><br>
+            party: <%= members[i].party %><br>
+            <a href=<%= members[i].url %>><%= members[i].url %></a> <br>
+            phone number: <%= members[i].phone%><br>
+            fax: <%= (members[i].fax === null) ? "N/A" :  members[i].fax %> <br>
+          </p>
+        </div>
+      <% } %>
+    </ul>
+  </body>
+</html>

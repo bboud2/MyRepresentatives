@@ -1,0 +1,27 @@
+body {
+  background: skyblue;
+  font-family: verdana;
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+}
+
+.hovermember {
+
+  text-align: left;
+  font-size: 28px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.hovermember p {
+  display: none;
+  color: #000000;
+}
+.hovermember:hover p {
+  position: fixed;
+  text-align: left;
+  top: 0px;
+  right: 300px;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: block;
+}
