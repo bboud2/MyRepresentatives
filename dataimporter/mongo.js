@@ -16,8 +16,12 @@ async function insertAllDocuments() {
 
     const db = client.db(dbName);
     try{
-      await db.collection(constants.senate).drop();
-      await db.collection(constants.house).drop();
+      // var senateCollection = db.collection(constants.senate);
+      // await db.collection(constants.senate).drop();
+      // console.log(`successfully dropped `)
+      // await db.collection(constants.house).drop();
+      await dropCollection(db, constants.senate);
+      await dropCollection(db, constants.house);
 
       await insertSenateDocuments(db, constants.senate);
       await insertSenateDocuments(db, constants.house);
@@ -31,8 +35,17 @@ async function insertAllDocuments() {
   })
 }
 
-async function waitInsert(db, collection) {
-  return await insertSenateDocuments(db, collection);
+function dropCollection(db, collection) {
+  return new Promise(async function(resolve) {
+    var collections = await db.collections();
+    if(collections.map(c => c.s.name).includes(collection)) {
+      await db.collection(collection).drop();
+      console.log(`successfully dropped collection: ${collection}`);
+    } else {
+      console.log(`the collection ${collection} did not previously exist`);
+    }
+    resolve();
+  })
 }
 
 function insertSenateDocuments(db, chamber) {
@@ -40,13 +53,21 @@ function insertSenateDocuments(db, chamber) {
     var collection = db.collection(chamber);
     senateMembers = ProPublicaAPI.getAllMembersByChamber(chamber)
       .then(function(promisedMembers) {
-        console.log("Recieved data from api");
+        console.log(`Recieved data from ${chamber} api`);
+        promisedMembers = generateFullNames(promisedMembers);
         collection.insertMany(promisedMembers, function(err, result) {
           if(err) return console.log(err);
-          console.log(`Imported ${collection} data`);
+          console.log(`Imported ${chamber} data`);
           resolve(result);
         });
       })
     });
   }
+
+function generateFullNames(members){
+  for(var i = 0; i < members.length; i++) {
+    members[i]['full_name'] = members[i].first_name + members[i].last_name;
+  }
+  return members;
+}
 insertAllDocuments();
