@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <a href="/">Home</a>
+  <a href="/members/senate">Senate Members</a>
+  <a href="/members/house">House Members</a>
+  <body>
+      <% for(var i = 0; i < members.length; i++){ %>
+        <div class="members">
+          <span><%= members[i].short_title + " " + members[i].first_name + " " + members[i].last_name + ": " + members[i].state  %></span>
+        </div>
+      <% } %>
+  </body>
+</html>

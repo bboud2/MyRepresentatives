@@ -42,10 +42,12 @@ app.get('/members/house', function(req, res){
     });
 })
 
-app.get('/members/:id', function(req, res){
-  console.log(`get request to: /members/${req.params.id}`);
-  var regexValue = '\.*'+req.params.id+'*\.';
-  db.collection(constants.senate).find({"full_name": new RegExp(regexValue, 'i')}).toArray((err, members) => {
+app.get('/search/:input', function(req, res){
+  console.log(`get request to: /members/${req.params.input}`);
+  var regexValue = '\.*'+req.params.input+'*\.';
+  db.collection(constants.legislature).find({"full_name": {$regex: regexValue, $options: 'i'}}).toArray((err, members) => {
     if(err) return console.log(err)
+    console.log(members);
+    res.render('search/list', {members: members});
   })
 });
