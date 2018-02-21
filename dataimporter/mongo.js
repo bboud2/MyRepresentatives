@@ -16,15 +16,10 @@ async function insertAllDocuments() {
 
     const db = client.db(dbName);
     try{
-      // var senateCollection = db.collection(constants.senate);
-      // await db.collection(constants.senate).drop();
-      // console.log(`successfully dropped `)
-      // await db.collection(constants.house).drop();
-      await dropCollection(db, constants.senate);
-      await dropCollection(db, constants.house);
+      await dropCollection(db, constants.legislature);
 
-      await insertSenateDocuments(db, constants.senate);
-      await insertSenateDocuments(db, constants.house);
+      await insertLegislativeMembers(db, constants.senate);
+      await insertLegislativeMembers(db, constants.house);
     }
     catch(err) {
       console.log(err);
@@ -48,9 +43,9 @@ function dropCollection(db, collection) {
   })
 }
 
-function insertSenateDocuments(db, chamber) {
+function insertLegislativeMembers(db, chamber) {
   return new Promise(resolve => {
-    var collection = db.collection(chamber);
+    var collection = db.collection(constants.legislature);
     senateMembers = ProPublicaAPI.getAllMembersByChamber(chamber)
       .then(function(promisedMembers) {
         console.log(`Recieved data from ${chamber} api`);
