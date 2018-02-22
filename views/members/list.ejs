@@ -7,10 +7,14 @@
     <a href="/">Home</a>
     <a href="/members/senate">Senate Members</a>
     <a href="/members/house">House Members</a>
+    <form action="/search/?input=input_value">
+      <input type="text" name="input" ><br>
+      <input type="submit" value="Submit">
+    </form>
     <ul>
       <% for(var i = 0; i < members.length; i++){ %>
         <div class="hovermember">
-          <li><span><%= members[i].first_name + " " + members[i].last_name + ": " + members[i].state  %></span></li>
+          <a href=<%= `/members/${members[i].id}` %> > <li><span><%= members[i].first_name + " " + members[i].last_name + ": " + members[i].state  %></span></li>
           <p>
             <%= members[i].title + ": " + members[i].first_name + " " + members[i].last_name %><br>
             party: <%= members[i].party %><br>

@@ -42,12 +42,21 @@ app.get('/members/house', function(req, res){
     });
 })
 
-app.get('/search/:input', function(req, res){
-  console.log(`get request to: /members/${req.params.input}`);
-  var regexValue = '\.*'+req.params.input+'*\.';
+app.get('/search', function(req, res){
+  console.log(`get request to: /search/${req.query.input}`);
+  var regexValue = '\.*'+req.query.input+'*\.';
   db.collection(constants.legislature).find({"full_name": {$regex: regexValue, $options: 'i'}}).toArray((err, members) => {
     if(err) return console.log(err)
     console.log(members);
     res.render('search/list', {members: members});
   })
 });
+
+app.get('/members/:member_id', function(req, res){
+  console.log(`get request to /members/${req.params.member_id}`);
+  db.collection(constants.legislature).findOne({id: req.params.member_id}, (err, member) => {
+    if(err) console.log(err);
+    console.log(member);
+    res.render('members/profile', {member: member});
+  })
+})

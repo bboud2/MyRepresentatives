@@ -6,6 +6,10 @@
   <a href="/">Home</a>
   <a href="/members/senate">Senate Members</a>
   <a href="/members/house">House Members</a>
+  <form action="/search/?input=input_value">
+    <input type="text" name="input" ><br>
+    <input type="submit" value="Submit">
+  </form>
   <body>
       <% for(var i = 0; i < members.length; i++){ %>
         <div class="members">
