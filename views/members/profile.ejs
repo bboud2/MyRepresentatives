@@ -4,13 +4,9 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <a href="/">Home</a>
-    <a href="/members/senate">Senate Members</a>
-    <a href="/members/house">House Members</a>
-    <form action="/search/?input=input_value">
-      <input type="text" name="input" ><br>
-      <input type="submit" value="Submit">
-    </form>
+    <!--HEADER-->
+    <div id="nav-container"></div>
+    <!--HEADER-->
     <ul>
           <p>
             <%= member.first_name + member.last_name %><br>
@@ -20,5 +16,12 @@
           </p>
         </div>
     </ul>
+
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $('#nav-container').load('../navbar.html');
+        });
+      </script>
   </body>
 </html>

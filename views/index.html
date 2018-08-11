@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="import" href="navbar.html">
   </head>
   <body>
-    <a href="/">Home</a>
-    <a href="/members/senate">Senate Members</a>
-    <a href="/members/house">House Members</a>
-    <form action="/search/?input=input_value">
-      <input type="text" name="input" ><br>
-      <input type="submit" value="Submit">
-    </form>
-    <p>welcome to my congress website</p>
+
+    <!--HEADER-->
+    <div id="nav-container"></div>
+    <!--HEADER-->
+    <p>Welcome MyRepresentatives!  A website made to easily find information about the representatives who make decisions on your behalf in the US legislature</p>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $('#nav-container').load('navbar.html');
+    });
+  </script>
   </body>
 </html>

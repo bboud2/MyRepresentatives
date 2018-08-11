@@ -1,27 +1,88 @@
-body {
-  background: skyblue;
-  font-family: verdana;
-  color: #fff;
-  padding: 30px;
-  text-align: center;
-}
+/* Change the link color to #111 (black) on hover */
 
-.hovermember {
-
-  text-align: left;
+.members {
   font-size: 28px;
   color: #ffffff;
   cursor: pointer;
+  padding-top:5%;
 }
-.hovermember p {
-  display: none;
-  color: #000000;
-}
-.hovermember:hover p {
-  position: fixed;
-  text-align: left;
-  top: 0px;
-  right: 300px;
-  background-color: rgba(255, 255, 255, 0.7);
+
+# dropdown-list {
   display: block;
+}
+
+#left-member-container {
+  width: 25%;
+  padding-left:5%;
+  float:left;
+}
+
+#right-member-container {
+  width: 25%;
+  padding-left:60%;
+}
+
+.member-state-flag {
+  max-width:100%;
+  max-height:90%;  
+  float: right;
+}
+
+.member-info {
+  height: 60px;
+  width: 400px;
+  margin: 10px;
+  padding: 5px;
+  list-style-type: none;
+  background-color: #333;
+  border-radius: 5%;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  color: white;
+  text-decoration: none;
+}
+
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.state-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #13223a;
+  min-width: 50px;
+  max-height: 200px;
+  overflow: auto;
+  color: white;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+}
+
+.state-dropdown-button {
+  border-radius: 10%;
+}
+
+.state-dropdown-container {
+
+}
+
+.state-dropdown-container:hover .state-dropdown-content {
+  display:block;
+}
+
+.state-dropdown-content option:hover {
+  background-color: #0b1c38;
 }

@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="list.js"></script>
   </head>
-  <body>
-    <a href="/">Home</a>
-    <a href="/members/senate">Senate Members</a>
-    <a href="/members/house">House Members</a>
-    <form action="/search/?input=input_value">
-      <input type="text" name="input" ><br>
-      <input type="submit" value="Submit">
-    </form>
-    <ul>
-      <% for(var i = 0; i < members.length; i++){ %>
-        <div class="hovermember">
-          <a href=<%= `/members/${members[i].id}` %> > <li><span><%= members[i].first_name + " " + members[i].last_name + ": " + members[i].state  %></span></li>
-          <p>
-            <%= members[i].title + ": " + members[i].first_name + " " + members[i].last_name %><br>
-            party: <%= members[i].party %><br>
-            <a href=<%= members[i].url %>><%= members[i].url %></a> <br>
-            phone number: <%= members[i].phone%><br>
-            fax: <%= (members[i].fax === null) ? "N/A" :  members[i].fax %> <br>
-          </p>
-        </div>
-      <% } %>
-    </ul>
-  </body>
+  <body onload='initListView(<%= JSON.stringify(members) %>)'>
+    <!--HEADER-->
+    <div id="nav-container"></div>
+    <!--HEADER-->
+    <div class="state-dropdown-container">
+      <button class="state-dropdown-button">Filter by state</button>
+      <div class="state-dropdown-content">
+        <% for(var key in states){ %>
+          <option onclick='stateFilterFunction(<%=JSON.stringify(members)%>,"<%=key%>")'> <%= JSON.stringify(states[key]).replace(/\"/g, ""); %> </option>
+        <% } %>
+      </div>
+  </div>
+  <div id="members-containers">
+  <div id="left-member-container">
+  </div>
+  <div id="right-member-container">
+  </div>
+</div>
 </html>

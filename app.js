@@ -1,6 +1,7 @@
 var express = require('express');
 var fs = require('fs');
-var memberController = require('./controller/membercontroller.js');
+//var memberController = require('./controller/membercontroller.js');
+var stateDictionary = require('./data/states.js');
 var MongoClient = require('mongodb').MongoClient;
 var constants = require('./common/constants');
 
@@ -28,24 +29,30 @@ app.get('/', function(req, res){
 
 app.get('/members/senate', function(req, res){
   console.log('get request to: /members/senate');
-  db.collection(constants.legislature).find({'short_title': 'Sen.'}).toArray((err, members) => {
+  db.collection(constants.legislature).find({'short_title': 'Sen.'})
+  .sort({state: 1})
+  .toArray((err, members) => {
       if (err) return console.log(err);
-      res.render('members/list', {members: members});
+      res.render('members/list', {members: members, states: stateDictionary.states});
   })
 });
 
 app.get('/members/house', function(req, res){
   console.log("get request to: /members/house");
-  db.collection(constants.legislature).find({'short_title': 'Rep.'}).toArray((err, members) => {
+  db.collection(constants.legislature).find({'short_title': 'Rep.'})
+  .sort({"state": 1})
+  .toArray((err, members) => {
       if (err) return console.log(err);
-      res.render('members/list', {members: members});
+         res.render('members/list', {members: members, states: stateDictionary.states});
     });
 })
 
 app.get('/search', function(req, res){
   console.log(`get request to: /search/${req.query.input}`);
   var regexValue = '\.*'+req.query.input+'*\.';
-  db.collection(constants.legislature).find({"full_name": {$regex: regexValue, $options: 'i'}}).toArray((err, members) => {
+  db.collection(constants.legislature).find({"full_name": {$regex: regexValue, $options: 'i'}})
+  .sort({"state": 1})
+  .toArray((err, members) => {
     if(err) return console.log(err)
     console.log(members);
     res.render('search/list', {members: members});
